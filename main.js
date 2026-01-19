@@ -1,10 +1,67 @@
 import { cleanJson } from './parser/cleanJson.js';
 import { parseImages } from './parser/parseImages.js';
 import { parseSections } from './parser/parseSections.js';
+import { parseTemplateTree } from './parser/parseTemplateTree.js';
+
 import { downloadImages } from './utils/downloadImages.js';
+import { renderTreeNode } from './utils/renderTreeNode.js';
+
+/* ================= DOM ================= */
 
 const fileInput = document.getElementById('jsonFile');
+const fileBtn = document.getElementById('fileBtn');
+const clearBtn = document.getElementById('clearBtn');
+const fileMeta = document.getElementById('fileMeta');
 const cdnInput = document.getElementById('cdn');
+
+const imagesEl = document.getElementById('images');
+const sectionsEl = document.getElementById('sections');
+
+/* ================= State ================= */
+
+let lastImages = [];
+let lastSections = null;
+let templateTree = null;
+
+/* ================= Utils ================= */
+
+/**
+ * Normalize CDN input
+ * 支持：
+ * - CDN prefix
+ * - CDN prefix/
+ * - 完整图片 URL（含 ?v=）
+ */
+function normalizeCdn(input) {
+  if (!input) return '';
+
+  const match = input.match(/^(https?:\/\/[^/]+\/cdn\/shop\/files)/);
+  if (match) return match[1];
+
+  return input.replace(/\/$/, '');
+}
+
+/* ================= Clear ================= */
+
+function clearAll() {
+  fileInput.value = '';
+  fileMeta.textContent = 'No file selected';
+  cdnInput.value = '';
+
+  lastImages = [];
+  lastSections = null;
+
+  imagesEl.classList.add('hidden');
+  sectionsEl.classList.add('hidden');
+  imagesEl.innerHTML = '';
+  sectionsEl.innerHTML = '';
+}
+
+clearBtn.onclick = clearAll;
+
+/* ================= File Picker ================= */
+
+fileBtn.onclick = () => fileInput.click();
 
 /* ================= JSON 读取 & 解析 ================= */
 
@@ -12,10 +69,11 @@ fileInput.addEventListener('change', async () => {
   const file = fileInput.files[0];
   if (!file) return;
 
-  const raw = await file.text();
-  let json;
+  fileMeta.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
 
+  let json;
   try {
+    const raw = await file.text();
     json = JSON.parse(cleanJson(raw));
   } catch (e) {
     console.error(e);
@@ -23,53 +81,129 @@ fileInput.addEventListener('change', async () => {
     return;
   }
 
-  const images = parseImages(json);
-  const sections = parseSections(json);
+  lastImages = parseImages(json);
+  lastSections = parseSections(json);
+  templateTree = parseTemplateTree(json, file.name);
 
-  renderImages(images);
-  renderSections(sections);
+  renderImages();
+  renderSections();
+  renderStructure(templateTree);
 });
 
-/* ================= 渲染 Images ================= */
+/* ================= CDN 变化 → 重新渲染 Images ================= */
 
-function renderImages(images) {
-  const el = document.getElementById('images');
-  el.classList.remove('hidden');
+let cdnTimer;
+cdnInput.addEventListener('input', () => {
+  if (!lastImages.length) return;
 
-  el.innerHTML = `
-    <h3>📦 Images (${images.length})</h3>
-    <div class="list">
-      ${images.map(name => `
-        <div class="row">
-          <span>${name}</span>
-          <span class="ok">✓</span>
-        </div>
-      `).join('')}
+  clearTimeout(cdnTimer);
+  cdnTimer = setTimeout(() => {
+    renderImages();
+  }, 300);
+});
+
+/* ================= 渲染 Images（Grid） ================= */
+
+function renderImages() {
+  if (!lastImages.length) return;
+
+  imagesEl.classList.remove('hidden');
+
+  const cdn = normalizeCdn(cdnInput.value);
+
+  imagesEl.innerHTML = `
+    <h3>
+      <span>🖼 Images</span>
+      <span>${lastImages.length}</span>
+    </h3>
+
+    <div class="image-grid">
+      ${lastImages
+        .map(name => {
+          const src = cdn ? `${cdn}/${name}` : '';
+          return `
+            <div class="image-item">
+              <div class="thumb">
+                ${
+                  src
+                    ? `<img src="${src}" loading="lazy"
+                        onerror="this.style.display='none'" />`
+                    : ''
+                }
+              </div>
+              <div class="name">${name}</div>
+            </div>
+          `;
+        })
+        .join('')}
     </div>
+
     <button id="download">Download ZIP</button>
   `;
 
-  const btn = document.getElementById('download');
-  btn.onclick = () => {
-    downloadImages(images, cdnInput.value);
+  document.getElementById('download').onclick = () => {
+    downloadImages(lastImages, cdn);
   };
 }
 
-/* ================= 渲染 Sections ================= */
+/* ================= 渲染 Sections（双卡同一行） ================= */
 
-function renderSections({ total, types }) {
-  const el = document.getElementById('sections');
-  el.classList.remove('hidden');
+function renderSections() {
+  if (!lastSections) return;
+
+  sectionsEl.classList.remove('hidden');
+
+  const { total, types } = lastSections;
+
+  sectionsEl.innerHTML = `
+    <div class="section-row">
+      <!-- 左：Sections 统计 -->
+      <div class="card">
+        <h3>
+          <span>🧩 Sections</span>
+          <span>${total}</span>
+        </h3>
+
+        <div class="list">
+          ${types
+            .map(
+              ([type, count]) => `
+                <div class="row">
+                  <span>${type}</span>
+                  <span>x${count}</span>
+                </div>
+              `
+            )
+            .join('')}
+        </div>
+      </div>
+
+      <!-- 右：Structure -->
+      <div class="card">
+        <h3>
+          <span>🌳 Structure</span>
+        </h3>
+
+        <div id="structure"></div>
+      </div>
+    </div>
+  `;
+}
+
+/* ================= 渲染 Structure（独立） ================= */
+
+function renderStructure(tree) {
+  const el = document.getElementById('structure');
+  if (!el) return;
+
+  if (!tree) {
+    el.innerHTML = `<div class="muted">No structure</div>`;
+    return;
+  }
+
+  const textTree = renderTreeNode(tree);
 
   el.innerHTML = `
-    <h3>🧩 Sections (${total})</h3>
-    <div class="list">
-      ${types.map(([type, count]) => `
-        <div class="row">
-          <span>${type}</span>
-          <span>x${count}</span>
-        </div>
-      `).join('')}
-    </div>
+    <pre class="structure-tree">${textTree}</pre>
   `;
 }

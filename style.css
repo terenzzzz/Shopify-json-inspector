@@ -9,6 +9,8 @@ body {
   color: #111;
 }
 
+/* ===== Header ===== */
+
 header {
   display: flex;
   justify-content: space-between;
@@ -21,12 +23,24 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 20px;
 }
+
+header a {
+  font-size: 13px;
+  text-decoration: none;
+  color: #555;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Layout ===== */
 
 .layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 300px 1fr;
   height: calc(100vh - 49px);
 }
 
@@ -39,32 +53,108 @@ header h1 {
   background: #fff;
 }
 
-.input label {
-  display: block;
+/* ===== File Picker ===== */
+
+.file-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #eee;
   margin-bottom: 16px;
+}
+
+.file-picker .label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.file-btn {
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px dashed #bbb;
+  background: #fafafa;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #111;
+}
+
+.file-btn:hover {
+  background: #f0f0f0;
+}
+
+.file-meta {
+  font-size: 12px;
+  color: #666;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.clear-btn {
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: #f3f3f3;
+}
+
+
+/* ===== Input Field ===== */
+
+.field {
+  display: block;
+}
+
+.field span {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.field input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px 8px;
   font-size: 13px;
 }
 
-.input input {
-  width: 100%;
-  margin-top: 6px;
-  padding: 6px;
+.field small {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #777;
 }
+
+/* ===== Result ===== */
 
 .result {
   overflow: auto;
 }
+
+/* ===== Card ===== */
 
 .card {
   background: #fff;
   border: 1px solid #ddd;
   padding: 12px;
   margin-bottom: 16px;
+  border-radius: 8px;
 }
 
 .card h3 {
   margin: 0 0 8px;
   font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list {
@@ -75,18 +165,141 @@ header h1 {
 .row {
   display: flex;
   justify-content: space-between;
-  padding: 2px 0;
+  padding: 4px 0;
 }
 
-.ok { color: #0a0; }
-.err { color: #c00; }
+.row:hover {
+  background: #f6f7f8;
+}
+
+.ok {
+  color: #0a0;
+}
+
+.err {
+  color: #c00;
+}
 
 .hidden {
   display: none;
 }
 
+/* ===== Button ===== */
+
 button {
-  margin-top: 10px;
-  padding: 6px 10px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
   cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* ===== Image Grid ===== */
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.image-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+  font-size: 12px;
+  cursor: default;
+}
+
+.image-item:hover {
+  border-color: #aaa;
+}
+
+.thumb {
+  width: 100%;
+  height: 80px;
+  background: #f3f3f3;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.name {
+  margin-top: 6px;
+  word-break: break-all;
+  text-align: center;
+  color: #333;
+}
+
+.section-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .section-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.muted {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 结构树整体 */
+.structure-tree {
+  white-space: pre;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 12px 14px;
+  background: #fafafa;
+  border-radius: 8px;
+  color: #111827;
+  overflow-x: auto;
+}
+
+/* Section 行（第一层） */
+.structure-tree .section {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Block 行（子级） */
+.structure-tree .block {
+  color: #374151;
+}
+
+/* disabled */
+.structure-tree .disabled {
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* hover 高亮（整行） */
+.structure-tree span:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+@media screen and (max-width: 1200px) {
+  .section-row {
+    grid-template-columns: 1fr;
+  }
 }
