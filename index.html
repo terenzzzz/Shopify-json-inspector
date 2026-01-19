@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shopify OS2 Inspector</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>Shopify OS2.0 Template Inspector</header>
+
+  <main class="layout">
+    <!-- LEFT -->
+    <section class="panel input">
+      <label>
+        Template JSON
+        <input type="file" id="jsonFile" accept=".json" />
+      </label>
+
+      <label>
+        CDN Prefix
+        <input
+          type="text"
+          id="cdn"
+          placeholder="https://xxx/cdn/shop/files/"
+        />
+      </label>
+    </section>
+
+    <!-- RIGHT -->
+    <section class="panel result">
+      <div id="images" class="card hidden"></div>
+      <div id="sections" class="card hidden"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

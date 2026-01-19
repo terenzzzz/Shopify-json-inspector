@@ -1,0 +1,154 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "referral_banner_hTGa9D": {
+      "type": "referral-banner",
+      "name": "Referral Banner",
+      "settings": {
+        "image": "shopify://shop_images/referral-banner.webp",
+        "image_mb": "shopify://shop_images/referral-banner-mb.webp"
+      }
+    },
+    "referral_benefit_GbQepW": {
+      "type": "referral-benefit",
+      "blocks": {
+        "benefit_p7PEcA": {
+          "type": "benefit",
+          "settings": {
+            "background": "shopify://shop_images/referral-benefit-1.webp",
+            "icon": "<svg width=\"56\" height=\"56\" viewbox=\"0 0 56 56\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M0 14C0 6.26801 6.26801 0 14 0H42C49.732 0 56 6.26801 56 14V42C56 49.732 49.732 56 42 56H14C6.26801 56 0 49.732 0 42V14Z\" fill=\"#FFE5D9\"></path>\n<path d=\"M40.374 36.9814C39.7003 35.3856 38.7226 33.936 37.4954 32.7135C36.2719 31.4875 34.8227 30.51 33.2275 29.8349C33.2133 29.8278 33.199 29.8242 33.1847 29.8171C35.4097 28.2099 36.8561 25.5921 36.8561 22.6385C36.8561 17.7457 32.8918 13.7814 27.999 13.7814C23.1061 13.7814 19.1418 17.7457 19.1418 22.6385C19.1418 25.5921 20.5883 28.2099 22.8133 29.8207C22.799 29.8278 22.7847 29.8314 22.7704 29.8385C21.1704 30.5135 19.7347 31.4814 18.5025 32.7171C17.2765 33.9405 16.299 35.3898 15.624 36.9849C14.9608 38.5466 14.6032 40.2208 14.5704 41.9171C14.5694 41.9552 14.5761 41.9931 14.5901 42.0286C14.604 42.0641 14.6249 42.0965 14.6515 42.1238C14.6781 42.151 14.71 42.1727 14.7451 42.1875C14.7802 42.2023 14.818 42.21 14.8561 42.2099H16.999C17.1561 42.2099 17.2811 42.0849 17.2847 41.9314C17.3561 39.1742 18.4633 36.5921 20.4204 34.6349C22.4454 32.6099 25.1347 31.4957 27.999 31.4957C30.8633 31.4957 33.5525 32.6099 35.5775 34.6349C37.5347 36.5921 38.6418 39.1742 38.7133 41.9314C38.7168 42.0885 38.8418 42.2099 38.999 42.2099H41.1418C41.18 42.21 41.2177 42.2023 41.2528 42.1875C41.288 42.1727 41.3198 42.151 41.3464 42.1238C41.3731 42.0965 41.394 42.0641 41.4079 42.0286C41.4218 41.9931 41.4285 41.9552 41.4275 41.9171C41.3918 40.2099 41.0383 38.5492 40.374 36.9814ZM27.999 28.7814C26.3597 28.7814 24.8168 28.1421 23.6561 26.9814C22.4954 25.8207 21.8561 24.2778 21.8561 22.6385C21.8561 20.9992 22.4954 19.4564 23.6561 18.2957C24.8168 17.1349 26.3597 16.4957 27.999 16.4957C29.6383 16.4957 31.1811 17.1349 32.3418 18.2957C33.5025 19.4564 34.1418 20.9992 34.1418 22.6385C34.1418 24.2778 33.5025 25.8207 32.3418 26.9814C31.1811 28.1421 29.6383 28.7814 27.999 28.7814Z\" fill=\"#FF7A3D\"></path>\n</svg>",
+            "title": "What You Get",
+            "text": "You will receive a <span>15% discount code</span> and an <br>additional <span>1-year warranty</span> for your headphone."
+          }
+        },
+        "benefit_RXDe7L": {
+          "type": "benefit",
+          "settings": {
+            "background": "shopify://shop_images/referral-benefit-2.webp",
+            "icon": "<svg width=\"56\" height=\"56\" viewbox=\"0 0 56 56\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<rect width=\"56\" height=\"56\" rx=\"10\" fill=\"#FFE5D9\"></rect>\n<mask id=\"path-2-outside-1_312_1769\" maskunits=\"userSpaceOnUse\" x=\"13.5\" y=\"14\" width=\"30\" height=\"28\" fill=\"black\">\n<rect fill=\"white\" x=\"13.5\" y=\"14\" width=\"30\" height=\"28\"></rect>\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M28.5 16.3681C27.8614 15.5373 26.8449 15 25.7 15C23.767 15 22.2 16.5317 22.2 18.4211C22.2 19.1912 22.4604 19.9019 22.8997 20.4737H17.413C17.044 20.4737 16.7257 20.4737 16.4635 20.4946C16.1867 20.5167 15.9115 20.5655 15.6466 20.6974C15.2515 20.8942 14.9302 21.2082 14.7289 21.5944C14.5939 21.8533 14.544 22.1224 14.5214 22.3929C14.5 22.6492 14.5 22.9603 14.5 23.321V25.1527C14.5 25.5134 14.5 25.8245 14.5214 26.0808C14.544 26.3513 14.5939 26.6204 14.7289 26.8792C14.9302 27.2655 15.2515 27.5795 15.6466 27.7763C15.7301 27.8179 15.8147 27.8512 15.9 27.878L15.9 38.1527C15.9 38.5134 15.9 38.8245 15.9214 39.0808C15.944 39.3513 15.9939 39.6203 16.1289 39.8792C16.3302 40.2655 16.6515 40.5795 17.0466 40.7763C17.3115 40.9082 17.5867 40.957 17.8635 40.9791C18.1257 41 18.444 41 18.813 41H38.187C38.556 41 38.8743 41 39.1365 40.9791C39.4133 40.957 39.6885 40.9082 39.9534 40.7763C40.3485 40.5795 40.6698 40.2655 40.8711 39.8792C41.0061 39.6203 41.056 39.3513 41.0786 39.0808C41.1 38.8245 41.1 38.5134 41.1 38.1527V27.878C41.1853 27.8512 41.2699 27.8179 41.3534 27.7763C41.7485 27.5795 42.0698 27.2655 42.2711 26.8792C42.4061 26.6204 42.456 26.3513 42.4786 26.0808C42.5 25.8245 42.5 25.5134 42.5 25.1527V23.321C42.5 22.9603 42.5 22.6492 42.4786 22.3929C42.456 22.1224 42.4061 21.8533 42.2711 21.5944C42.0698 21.2082 41.7485 20.8942 41.3534 20.6974C41.0885 20.5655 40.8133 20.5167 40.5365 20.4946C40.2743 20.4737 39.956 20.4737 39.587 20.4737H34.1003C34.5396 19.9019 34.8 19.1912 34.8 18.4211C34.8 16.5317 33.233 15 31.3 15C30.1551 15 29.1386 15.5373 28.5 16.3681ZM27.7539 20.2477C27.7979 19.8602 27.8 19.3097 27.8 18.4211C27.8 17.2874 26.8598 16.3684 25.7 16.3684C24.5402 16.3684 23.6 17.2874 23.6 18.4211C23.6 19.5547 24.5402 20.4737 25.7 20.4737C26.6092 20.4737 27.1724 20.4717 27.5688 20.4286C27.6351 20.4214 27.6886 20.4137 27.7312 20.4064C27.7386 20.3648 27.7465 20.3125 27.7539 20.2477ZM29.2 18.4211C29.2 19.3097 29.2021 19.8602 29.2461 20.2477C29.2535 20.3125 29.2614 20.3648 29.2688 20.4064C29.3114 20.4137 29.3649 20.4214 29.4312 20.4286C29.8276 20.4717 30.3908 20.4737 31.3 20.4737C32.4598 20.4737 33.4 19.5547 33.4 18.4211C33.4 17.2874 32.4598 16.3684 31.3 16.3684C30.1402 16.3684 29.2 17.2874 29.2 18.4211ZM39.7 28V38.1263C39.7 38.5208 39.6995 38.7755 39.6833 38.9694C39.6677 39.1552 39.6413 39.2242 39.6237 39.258C39.5566 39.3867 39.4495 39.4914 39.3178 39.557C39.2832 39.5742 39.2127 39.6 39.0225 39.6152C38.8242 39.631 38.5636 39.6316 38.16 39.6316H29.2V28L39.7 28ZM29.2 26.6316L39.5908 26.6316C39.9769 26.6315 40.2293 26.6306 40.4225 26.6152C40.6127 26.6 40.6832 26.5742 40.7178 26.557C40.8495 26.4914 40.9566 26.3867 41.0237 26.258C41.0413 26.2242 41.0677 26.1553 41.0833 25.9694C41.0995 25.7755 41.1 25.5208 41.1 25.1263V23.3474C41.1 22.9529 41.0995 22.6982 41.0833 22.5043C41.0677 22.3184 41.0413 22.2495 41.0237 22.2157C40.9566 22.0869 40.8495 21.9823 40.7178 21.9167C40.6832 21.8994 40.6127 21.8737 40.4225 21.8585C40.2242 21.8426 39.9636 21.8421 39.56 21.8421H29.2V26.6316ZM27.8 21.8421V26.6316L17.4092 26.6316C17.0231 26.6315 16.7707 26.6306 16.5775 26.6152C16.3873 26.6 16.3168 26.5742 16.2822 26.557C16.1505 26.4914 16.0434 26.3867 15.9763 26.258C15.9587 26.2242 15.9323 26.1553 15.9168 25.9694C15.9005 25.7755 15.9 25.5208 15.9 25.1263V23.3474C15.9 22.9529 15.9005 22.6982 15.9168 22.5043C15.9323 22.3184 15.9587 22.2495 15.9763 22.2157C16.0434 22.0869 16.1505 21.9823 16.2822 21.9167C16.3168 21.8994 16.3873 21.8737 16.5775 21.8585C16.7758 21.8426 17.0364 21.8421 17.44 21.8421H27.8ZM27.8 28V39.6316H18.84C18.4364 39.6316 18.1758 39.631 17.9775 39.6152C17.7873 39.6 17.7168 39.5742 17.6822 39.557C17.5505 39.4914 17.4434 39.3867 17.3763 39.258C17.3587 39.2242 17.3323 39.1552 17.3168 38.9694C17.3005 38.7755 17.3 38.5208 17.3 38.1263V28L27.8 28Z\"></path>\n</mask>\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M28.5 16.3681C27.8614 15.5373 26.8449 15 25.7 15C23.767 15 22.2 16.5317 22.2 18.4211C22.2 19.1912 22.4604 19.9019 22.8997 20.4737H17.413C17.044 20.4737 16.7257 20.4737 16.4635 20.4946C16.1867 20.5167 15.9115 20.5655 15.6466 20.6974C15.2515 20.8942 14.9302 21.2082 14.7289 21.5944C14.5939 21.8533 14.544 22.1224 14.5214 22.3929C14.5 22.6492 14.5 22.9603 14.5 23.321V25.1527C14.5 25.5134 14.5 25.8245 14.5214 26.0808C14.544 26.3513 14.5939 26.6204 14.7289 26.8792C14.9302 27.2655 15.2515 27.5795 15.6466 27.7763C15.7301 27.8179 15.8147 27.8512 15.9 27.878L15.9 38.1527C15.9 38.5134 15.9 38.8245 15.9214 39.0808C15.944 39.3513 15.9939 39.6203 16.1289 39.8792C16.3302 40.2655 16.6515 40.5795 17.0466 40.7763C17.3115 40.9082 17.5867 40.957 17.8635 40.9791C18.1257 41 18.444 41 18.813 41H38.187C38.556 41 38.8743 41 39.1365 40.9791C39.4133 40.957 39.6885 40.9082 39.9534 40.7763C40.3485 40.5795 40.6698 40.2655 40.8711 39.8792C41.0061 39.6203 41.056 39.3513 41.0786 39.0808C41.1 38.8245 41.1 38.5134 41.1 38.1527V27.878C41.1853 27.8512 41.2699 27.8179 41.3534 27.7763C41.7485 27.5795 42.0698 27.2655 42.2711 26.8792C42.4061 26.6204 42.456 26.3513 42.4786 26.0808C42.5 25.8245 42.5 25.5134 42.5 25.1527V23.321C42.5 22.9603 42.5 22.6492 42.4786 22.3929C42.456 22.1224 42.4061 21.8533 42.2711 21.5944C42.0698 21.2082 41.7485 20.8942 41.3534 20.6974C41.0885 20.5655 40.8133 20.5167 40.5365 20.4946C40.2743 20.4737 39.956 20.4737 39.587 20.4737H34.1003C34.5396 19.9019 34.8 19.1912 34.8 18.4211C34.8 16.5317 33.233 15 31.3 15C30.1551 15 29.1386 15.5373 28.5 16.3681ZM27.7539 20.2477C27.7979 19.8602 27.8 19.3097 27.8 18.4211C27.8 17.2874 26.8598 16.3684 25.7 16.3684C24.5402 16.3684 23.6 17.2874 23.6 18.4211C23.6 19.5547 24.5402 20.4737 25.7 20.4737C26.6092 20.4737 27.1724 20.4717 27.5688 20.4286C27.6351 20.4214 27.6886 20.4137 27.7312 20.4064C27.7386 20.3648 27.7465 20.3125 27.7539 20.2477ZM29.2 18.4211C29.2 19.3097 29.2021 19.8602 29.2461 20.2477C29.2535 20.3125 29.2614 20.3648 29.2688 20.4064C29.3114 20.4137 29.3649 20.4214 29.4312 20.4286C29.8276 20.4717 30.3908 20.4737 31.3 20.4737C32.4598 20.4737 33.4 19.5547 33.4 18.4211C33.4 17.2874 32.4598 16.3684 31.3 16.3684C30.1402 16.3684 29.2 17.2874 29.2 18.4211ZM39.7 28V38.1263C39.7 38.5208 39.6995 38.7755 39.6833 38.9694C39.6677 39.1552 39.6413 39.2242 39.6237 39.258C39.5566 39.3867 39.4495 39.4914 39.3178 39.557C39.2832 39.5742 39.2127 39.6 39.0225 39.6152C38.8242 39.631 38.5636 39.6316 38.16 39.6316H29.2V28L39.7 28ZM29.2 26.6316L39.5908 26.6316C39.9769 26.6315 40.2293 26.6306 40.4225 26.6152C40.6127 26.6 40.6832 26.5742 40.7178 26.557C40.8495 26.4914 40.9566 26.3867 41.0237 26.258C41.0413 26.2242 41.0677 26.1553 41.0833 25.9694C41.0995 25.7755 41.1 25.5208 41.1 25.1263V23.3474C41.1 22.9529 41.0995 22.6982 41.0833 22.5043C41.0677 22.3184 41.0413 22.2495 41.0237 22.2157C40.9566 22.0869 40.8495 21.9823 40.7178 21.9167C40.6832 21.8994 40.6127 21.8737 40.4225 21.8585C40.2242 21.8426 39.9636 21.8421 39.56 21.8421H29.2V26.6316ZM27.8 21.8421V26.6316L17.4092 26.6316C17.0231 26.6315 16.7707 26.6306 16.5775 26.6152C16.3873 26.6 16.3168 26.5742 16.2822 26.557C16.1505 26.4914 16.0434 26.3867 15.9763 26.258C15.9587 26.2242 15.9323 26.1553 15.9168 25.9694C15.9005 25.7755 15.9 25.5208 15.9 25.1263V23.3474C15.9 22.9529 15.9005 22.6982 15.9168 22.5043C15.9323 22.3184 15.9587 22.2495 15.9763 22.2157C16.0434 22.0869 16.1505 21.9823 16.2822 21.9167C16.3168 21.8994 16.3873 21.8737 16.5775 21.8585C16.7758 21.8426 17.0364 21.8421 17.44 21.8421H27.8ZM27.8 28V39.6316H18.84C18.4364 39.6316 18.1758 39.631 17.9775 39.6152C17.7873 39.6 17.7168 39.5742 17.6822 39.557C17.5505 39.4914 17.4434 39.3867 17.3763 39.258C17.3587 39.2242 17.3323 39.1552 17.3168 38.9694C17.3005 38.7755 17.3 38.5208 17.3 38.1263V28L27.8 28Z\" fill=\"#FF7A3D\"></path>\n<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M28.5 16.3681C27.8614 15.5373 26.8449 15 25.7 15C23.767 15 22.2 16.5317 22.2 18.4211C22.2 19.1912 22.4604 19.9019 22.8997 20.4737H17.413C17.044 20.4737 16.7257 20.4737 16.4635 20.4946C16.1867 20.5167 15.9115 20.5655 15.6466 20.6974C15.2515 20.8942 14.9302 21.2082 14.7289 21.5944C14.5939 21.8533 14.544 22.1224 14.5214 22.3929C14.5 22.6492 14.5 22.9603 14.5 23.321V25.1527C14.5 25.5134 14.5 25.8245 14.5214 26.0808C14.544 26.3513 14.5939 26.6204 14.7289 26.8792C14.9302 27.2655 15.2515 27.5795 15.6466 27.7763C15.7301 27.8179 15.8147 27.8512 15.9 27.878L15.9 38.1527C15.9 38.5134 15.9 38.8245 15.9214 39.0808C15.944 39.3513 15.9939 39.6203 16.1289 39.8792C16.3302 40.2655 16.6515 40.5795 17.0466 40.7763C17.3115 40.9082 17.5867 40.957 17.8635 40.9791C18.1257 41 18.444 41 18.813 41H38.187C38.556 41 38.8743 41 39.1365 40.9791C39.4133 40.957 39.6885 40.9082 39.9534 40.7763C40.3485 40.5795 40.6698 40.2655 40.8711 39.8792C41.0061 39.6203 41.056 39.3513 41.0786 39.0808C41.1 38.8245 41.1 38.5134 41.1 38.1527V27.878C41.1853 27.8512 41.2699 27.8179 41.3534 27.7763C41.7485 27.5795 42.0698 27.2655 42.2711 26.8792C42.4061 26.6204 42.456 26.3513 42.4786 26.0808C42.5 25.8245 42.5 25.5134 42.5 25.1527V23.321C42.5 22.9603 42.5 22.6492 42.4786 22.3929C42.456 22.1224 42.4061 21.8533 42.2711 21.5944C42.0698 21.2082 41.7485 20.8942 41.3534 20.6974C41.0885 20.5655 40.8133 20.5167 40.5365 20.4946C40.2743 20.4737 39.956 20.4737 39.587 20.4737H34.1003C34.5396 19.9019 34.8 19.1912 34.8 18.4211C34.8 16.5317 33.233 15 31.3 15C30.1551 15 29.1386 15.5373 28.5 16.3681ZM27.7539 20.2477C27.7979 19.8602 27.8 19.3097 27.8 18.4211C27.8 17.2874 26.8598 16.3684 25.7 16.3684C24.5402 16.3684 23.6 17.2874 23.6 18.4211C23.6 19.5547 24.5402 20.4737 25.7 20.4737C26.6092 20.4737 27.1724 20.4717 27.5688 20.4286C27.6351 20.4214 27.6886 20.4137 27.7312 20.4064C27.7386 20.3648 27.7465 20.3125 27.7539 20.2477ZM29.2 18.4211C29.2 19.3097 29.2021 19.8602 29.2461 20.2477C29.2535 20.3125 29.2614 20.3648 29.2688 20.4064C29.3114 20.4137 29.3649 20.4214 29.4312 20.4286C29.8276 20.4717 30.3908 20.4737 31.3 20.4737C32.4598 20.4737 33.4 19.5547 33.4 18.4211C33.4 17.2874 32.4598 16.3684 31.3 16.3684C30.1402 16.3684 29.2 17.2874 29.2 18.4211ZM39.7 28V38.1263C39.7 38.5208 39.6995 38.7755 39.6833 38.9694C39.6677 39.1552 39.6413 39.2242 39.6237 39.258C39.5566 39.3867 39.4495 39.4914 39.3178 39.557C39.2832 39.5742 39.2127 39.6 39.0225 39.6152C38.8242 39.631 38.5636 39.6316 38.16 39.6316H29.2V28L39.7 28ZM29.2 26.6316L39.5908 26.6316C39.9769 26.6315 40.2293 26.6306 40.4225 26.6152C40.6127 26.6 40.6832 26.5742 40.7178 26.557C40.8495 26.4914 40.9566 26.3867 41.0237 26.258C41.0413 26.2242 41.0677 26.1553 41.0833 25.9694C41.0995 25.7755 41.1 25.5208 41.1 25.1263V23.3474C41.1 22.9529 41.0995 22.6982 41.0833 22.5043C41.0677 22.3184 41.0413 22.2495 41.0237 22.2157C40.9566 22.0869 40.8495 21.9823 40.7178 21.9167C40.6832 21.8994 40.6127 21.8737 40.4225 21.8585C40.2242 21.8426 39.9636 21.8421 39.56 21.8421H29.2V26.6316ZM27.8 21.8421V26.6316L17.4092 26.6316C17.0231 26.6315 16.7707 26.6306 16.5775 26.6152C16.3873 26.6 16.3168 26.5742 16.2822 26.557C16.1505 26.4914 16.0434 26.3867 15.9763 26.258C15.9587 26.2242 15.9323 26.1553 15.9168 25.9694C15.9005 25.7755 15.9 25.5208 15.9 25.1263V23.3474C15.9 22.9529 15.9005 22.6982 15.9168 22.5043C15.9323 22.3184 15.9587 22.2495 15.9763 22.2157C16.0434 22.0869 16.1505 21.9823 16.2822 21.9167C16.3168 21.8994 16.3873 21.8737 16.5775 21.8585C16.7758 21.8426 17.0364 21.8421 17.44 21.8421H27.8ZM27.8 28V39.6316H18.84C18.4364 39.6316 18.1758 39.631 17.9775 39.6152C17.7873 39.6 17.7168 39.5742 17.6822 39.557C17.5505 39.4914 17.4434 39.3867 17.3763 39.258C17.3587 39.2242 17.3323 39.1552 17.3168 38.9694C17.3005 38.7755 17.3 38.5208 17.3 38.1263V28L27.8 28Z\" stroke=\"#FF7A3D\" stroke-width=\"0.8\" mask=\"url(#path-2-outside-1_312_1769)\"></path>\n</svg>",
+            "title": "What Your Friend Get",
+            "text": "Your friend will receive a <span>15% discount code</span>, <br>offering even more savings on their order."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_p7PEcA",
+        "benefit_RXDe7L"
+      ],
+      "name": "Referral Benefit",
+      "settings": {}
+    },
+    "referral_refer_bnpECW": {
+      "type": "referral-refer",
+      "name": "Referral Refer",
+      "settings": {
+        "notice": "*Please refer to the <a href=\"#section-referral-faq\">Terms &amp; Conditions</a> for detailed information on the discount code and extended warranty.",
+        "form_title": "Enter your email to get started",
+        "share_form_title": "Share with your friends to win exclusive<br> limited-time gifts!"
+      }
+    },
+    "referral_bonus_3RMNxk": {
+      "type": "referral-bonus",
+      "name": "Referral Bonus",
+      "settings": {
+        "title": "Limited-Time Bonus for <span>Top 3 </span>Referrers",
+        "text": "The top 3 referrers between January 19 and March 19 will each receive a 3-month Spotify membership for successful referrals. \n<br>\nIt’s a limited-time offer, the more you share, the greater your chances of winning more rewards!",
+        "notice": "*We will announce the winning users here and contact winning users via email on March 20th. Please be sure to check your inbox.",
+        "prize_image": "shopify://shop_images/referral-bonus-prize.webp",
+        "prize_text": "3-month Spotify membership"
+      }
+    },
+    "referral_reward_EByCVy": {
+      "type": "referral-reward",
+      "name": "Referral Reward",
+      "settings": {
+        "title": "Check Your Rewards",
+        "text": "Enter your email to check your referral status and rewards."
+      }
+    },
+    "referral_faq_wJcynb": {
+      "type": "referral-faq",
+      "blocks": {
+        "faq_nHf4eC": {
+          "type": "faq",
+          "settings": {
+            "title": "1.  What is the Shokz Referral Program?",
+            "text": "<span>The Shokz Referral Program allows you to earn rewards by referring your friends to purchase Shokz products. As a referrer, you will receive a 15% discount code and an additional 1-year warranty (on top of the standard Shokz 2-year warranty).</span> \n\n<span>Your friends (referees) will receive a 15% stackable discount on all products, except accessories, refurbished products, and certain specified items. (For details, please check the Discount Code Usage Instructions.)</span>"
+          }
+        },
+        "faq_TG3fT8": {
+          "type": "faq",
+          "settings": {
+            "title": "2. How does the referral program work?",
+            "text": "<span>The Shokz Referral Program rewards members for inviting friends or family to shop at the official Shokz store. Both the referrer and the referred friend receive rewards for successful referrals. Here's how to participate:</span>\n\n<ol>\n<li>Log into the Shokz Referral homepage to obtain your exclusive referral link. </li>\n<li>Share the link with friends or family. </li>\n<li>When your friend clicks the referral link and submits their email address, they will receive a reward code. If they complete their first order (with a minimum order value of £79.95) within the validity period of the discount code on <a href=\"https://uk.shokz.com/\">https://uk.shokz.com/</a>  and do not request a refund within 30 days of shipment, both you and your referred friend will receive the rewards.</li>\n</ol>"
+          }
+        },
+        "faq_NhK3Vx": {
+          "type": "faq",
+          "settings": {
+            "title": "3. What are the conditions for participating in the referral program?",
+            "text": "<ol>\n<li>This program is available exclusively on <a href=\"https://uk.shokz.com/\">https://uk.shokz.com/</a> and is open to all users in the UK. To participate, provide a valid email address, agree to the terms and conditions, and you’re ready to refer friends and family.</li>\n<li>Self-referrals are prohibited to ensure fairness; this includes using the same email, IP address, or browser session. Non-compliant referrals will be deemed invalid.</li>\n</ol>"
+          }
+        },
+        "faq_KREkz3": {
+          "type": "faq",
+          "settings": {
+            "title": "4. What rewards are available through referrals?",
+            "text": "<span>For the referrer: a 15% discount code and an additional one-year warranty. </span>\n<span>For the referred individual: a 15% discount code.</span>\n<div class=\"indentation\">\n<span>1. Discount Code Usage Instructions: </span>\n<ul>\n<li>The code is valid for 30 days from the date of issuance. </li>\n<li>The code is not applicable to accessories, refurbished products, or OpenFit Pro. \n</li>\n</ul>\n<span>2. Warranty Extension Reward Details: </span>\n<ul>\n<li>The warranty extension is only available to users who purchase from the official Shokz website. </li>\n<li>The referrer's order email must match the email used to generate the referral link.</li> \n<li>A user can only enjoy the Referral extended warranty service once, and it applies only to products (Excluding refurbished products, accessories and OpenFit Pro) purchased on <a href=\"https://uk.shokz.com/\"> https://uk.shokz.com/</a> within the last 2 years. </li>\n<li>If multiple products are eligible for extended warranty,the extended warranty service will be granted for only one of the products. </li>\n<li>Within the 1-year extended warranty period, customers are entitled to a maximum of two exchange requests.  </li>\n<li>To confirm which product qualifies for an extended warranty, please contact <a href=\"https://uk.help.shokz.com/s/submit-case-form?recordType=Consultancy&amp;extendedWarranty=1\">support.uk@shokz.com</a>.  </li>\n</ul>\n</div><span>In addition to these rewards, Shokz may offer special rewards through exclusive events for top-performing users during specific periods. Details are available on the event page.</span>"
+          }
+        },
+        "faq_QxAJ6L": {
+          "type": "faq",
+          "settings": {
+            "title": "5. Conditions for a Successful Referral:",
+            "text": "<ol>\n<li>The invitee must use your unique referral link to make their first purchase at <a href=\"https://uk.shokz.com/\">https://uk.shokz.com/</a>, and each invitee can only be referred once.</li>\n<li>If the referred customer clicks multiple referral links, the successful order will be attributed to the last referral link they clicked before completing their purchase.</li>\n<li>Shokz will evaluate orders to ensure that the referred customer has not requested a refund within 30 days of purchase. Only orders meeting these criteria will be approved, triggering an email to you to claim your reward.</li>\n<li>The referral link must not be shared inappropriately, sold, or used illegally.</li>\n</ol>"
+          }
+        },
+        "faq_Em4YE4": {
+          "type": "faq",
+          "settings": {
+            "title": "6. How can I check rewards and distribution timing?",
+            "text": "<ol>\n<li>Log into the Shokz Referral Page and click “Your Rewards” to view your referral status.</li>\n<li>When your referral makes a purchase, you will receive an email confirmation.</li>\n<li>Reward eligibility will be reviewed within 30 days after the date of the order. Once approved,  you will be notified via email to claim your reward.</li>\n</ol>"
+          }
+        },
+        "faq_rmEGg3": {
+          "type": "faq",
+          "settings": {
+            "title": "7. Termination and Charges",
+            "text": "<ol>\n<li>Shokz reserves the right to modify, suspend, or terminate the referral program or individual participation for any reason at its discretion. \n</li>\n<li>In cases of detected abuse, fraud, or violations of Terms of Service, Shokz may suspend accounts and revoke referral rewards. </li>\n<li>Shokz rigorously reviews referral activities and may adjust or suspend accounts and referrals based on fair and appropriate judgment. </li>\n<li>For questions about the referral program, feel free to  <a href=\"https://uk.help.shokz.com/s/submit-case-form?recordType=Consultancy&amp;extendedWarranty=1\">contact us</a>.</li>\n</ol>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_nHf4eC",
+        "faq_TG3fT8",
+        "faq_NhK3Vx",
+        "faq_KREkz3",
+        "faq_QxAJ6L",
+        "faq_Em4YE4",
+        "faq_rmEGg3"
+      ],
+      "name": "Referral FAQ",
+      "settings": {
+        "style": "",
+        "title": "Terms & Conditions"
+      }
+    }
+  },
+  "order": [
+    "referral_banner_hTGa9D",
+    "referral_benefit_GbQepW",
+    "referral_refer_bnpECW",
+    "referral_bonus_3RMNxk",
+    "referral_reward_EByCVy",
+    "referral_faq_wJcynb"
+  ]
+}
