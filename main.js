@@ -32,13 +32,18 @@ let templateTree = null;
  * - CDN prefix/
  * - 完整图片 URL（含 ?v=）
  */
-function normalizeCdn(input) {
-  if (!input) return '';
+function normalizeCdn(prefix) {
+  if (!prefix) return '';
 
-  const match = input.match(/^(https?:\/\/[^/]+\/cdn\/shop\/files)/);
-  if (match) return match[1];
+  // 去掉末尾所有 /
+  prefix = prefix.replace(/\/+$/, '');
 
-  return input.replace(/\/$/, '');
+  // 如果结尾不是 /files，则补上
+  if (!prefix.endsWith('/files')) {
+    prefix += '/files';
+  }
+
+  return prefix + '/';
 }
 
 /* ================= Core Loader ================= */
@@ -174,11 +179,61 @@ function renderImages() {
     </div>
 
     <button id="download">Download ZIP</button>
+
+    <div id="download-progress" class="hidden" style="margin-top:12px">
+      <div style="font-size:12px;margin-bottom:6px">
+        <span id="progress-text">0 / 0</span>
+        <span id="progress-result" style="margin-left:8px;color:#666"></span>
+      </div>
+      <div style="height:6px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+        <div id="progress-bar" style="height:100%;width:0%;background:#111"></div>
+      </div>
+    </div>
   `;
 
-  document.getElementById('download').onclick = () => {
-    downloadImages(lastImages, cdn);
+  const downloadBtn = document.getElementById('download');
+  downloadBtn.onclick = async () => {
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Downloading…';
+
+    await downloadImages(
+      lastImages,
+      cdn,
+      updateDownloadProgress,
+      showDownloadResult
+    );
+
+    downloadBtn.disabled = false;
+    downloadBtn.textContent = 'Download ZIP';
   };
+}
+
+function updateDownloadProgress(done, total) {
+  const wrapper = document.getElementById('download-progress');
+  const bar = document.getElementById('progress-bar');
+  const text = document.getElementById('progress-text');
+
+  if (!wrapper) return;
+
+  wrapper.classList.remove('hidden');
+
+  const percent = Math.round((done / total) * 100);
+
+  bar.style.width = `${percent}%`;
+  text.textContent = `Progress: ${done} / ${total}`;
+}
+
+function showDownloadResult(success, failed) {
+  const resultEl = document.getElementById('progress-result');
+  if (!resultEl) return;
+
+  if (failed > 0) {
+    resultEl.textContent = `Finished: ${success} success, ${failed} failed`;
+    resultEl.style.color = '#c00';
+  } else {
+    resultEl.textContent = `Finished: ${success} images`;
+    resultEl.style.color = '#0a0';
+  }
 }
 
 /* ================= 渲染 Sections（双卡同一行） ================= */
