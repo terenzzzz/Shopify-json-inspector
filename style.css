@@ -69,6 +69,23 @@ header a:hover {
   font-weight: 500;
 }
 
+.file-picker textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  resize: vertical;
+}
+
+.file-picker textarea:focus {
+  outline: none;
+  border-color: #111;
+}
+
 .file-btn {
   padding: 8px 10px;
   font-size: 13px;

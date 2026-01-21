@@ -41,39 +41,12 @@ function normalizeCdn(input) {
   return input.replace(/\/$/, '');
 }
 
-/* ================= Clear ================= */
+/* ================= Core Loader ================= */
 
-function clearAll() {
-  fileInput.value = '';
-  fileMeta.textContent = 'No file selected';
-  cdnInput.value = '';
-
-  lastImages = [];
-  lastSections = null;
-
-  imagesEl.classList.add('hidden');
-  sectionsEl.classList.add('hidden');
-  imagesEl.innerHTML = '';
-  sectionsEl.innerHTML = '';
-}
-
-clearBtn.onclick = clearAll;
-
-/* ================= File Picker ================= */
-
-fileBtn.onclick = () => fileInput.click();
-
-/* ================= JSON 读取 & 解析 ================= */
-
-fileInput.addEventListener('change', async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  fileMeta.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-
+function loadTemplateJson(raw, sourceLabel = '') {
   let json;
+
   try {
-    const raw = await file.text();
     json = JSON.parse(cleanJson(raw));
   } catch (e) {
     console.error(e);
@@ -83,11 +56,73 @@ fileInput.addEventListener('change', async () => {
 
   lastImages = parseImages(json);
   lastSections = parseSections(json);
-  templateTree = parseTemplateTree(json, file.name);
+  templateTree = parseTemplateTree(json, sourceLabel);
 
   renderImages();
   renderSections();
   renderStructure(templateTree);
+}
+
+/* ================= Clear ================= */
+
+function clearAll() {
+  // inputs
+  fileInput.value = '';
+  if (jsonPaste) jsonPaste.value = '';
+  fileMeta.textContent = 'No file selected';
+  cdnInput.value = '';
+
+  // data
+  lastImages = [];
+  lastSections = null;
+  templateTree = null;
+
+  // UI
+  imagesEl.classList.add('hidden');
+  sectionsEl.classList.add('hidden');
+  imagesEl.innerHTML = '';
+  sectionsEl.innerHTML = '';
+
+  const structureEl = document.getElementById('structure');
+  if (structureEl) structureEl.innerHTML = '';
+}
+
+clearBtn.onclick = clearAll;
+
+/* ================= File Picker ================= */
+
+fileBtn.onclick = () => fileInput.click();
+
+fileInput.addEventListener('change', async () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  fileMeta.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+
+  // 文件优先，清空粘贴内容
+  if (jsonPaste) jsonPaste.value = '';
+
+  const raw = await file.text();
+  loadTemplateJson(raw, file.name);
+});
+
+/* ================= JSON 读取 & 解析 ================= */
+
+let pasteTimer = null;
+
+jsonPaste.addEventListener('input', () => {
+  clearTimeout(pasteTimer);
+
+  pasteTimer = setTimeout(() => {
+    const raw = jsonPaste.value.trim();
+    if (!raw) return;
+
+    // 粘贴优先，清空文件
+    fileInput.value = '';
+    fileMeta.textContent = 'Pasted JSON';
+
+    loadTemplateJson(raw, 'pasted.json');
+  }, 300);
 });
 
 /* ================= CDN 变化 → 重新渲染 Images ================= */
