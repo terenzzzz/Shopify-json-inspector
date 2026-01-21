@@ -4,6 +4,7 @@
  * @param {string[]} images - 图片文件名数组
  * @param {string} cdnPrefix - CDN 前缀
  */
+import { showModal } from './showModal.js';
 export async function downloadImages(
   images,
   cdnPrefix,
@@ -11,7 +12,7 @@ export async function downloadImages(
   onFinish
 ) {
   if (!cdnPrefix) {
-    alert('请先填写 CDN Prefix');
+    showModal('请先填写 CDN Prefix');
     return;
   }
 

@@ -6,7 +6,8 @@ import { parseStats } from "./parser/parseStats.js";
 
 import { downloadImages } from "./utils/downloadImages.js";
 import { renderTreeNode } from "./utils/renderTreeNode.js";
-
+import { initModal, showModal } from './utils/showModal.js';
+initModal();
 /* ================= DOM ================= */
 
 const fileInput = document.getElementById("jsonFile");
