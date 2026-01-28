@@ -510,6 +510,15 @@ button:active {
   word-break: break-all;
 }
 
+.json-bubble .json-key { color: #2563eb; font-weight: 600; }
+.json-bubble .json-string { color: #16a34a; }
+.json-bubble .json-number { color: #7c3aed; }
+.json-bubble .json-boolean { color: #b45309; }
+.json-bubble .json-null { color: #64748b; font-style: italic; }
+.json-bubble .json-brace { color: #334155; }
+.json-bubble .json-colon { color: #334155; }
+.json-bubble .json-comma { color: #94a3b8; }
+
 .hidden {
   display: none !important;
 }
