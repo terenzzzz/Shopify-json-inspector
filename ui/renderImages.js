@@ -82,33 +82,40 @@ function setupImageModal() {
 
   document.querySelectorAll(".preview-img").forEach(img => {
     img.onclick = async () => {
-      modalImg.src = img.src;
       modalName.textContent = img.dataset.name || "";
       modalSize.textContent = "Loading…";
       if (modalDimensions) modalDimensions.textContent = "Loading…";
       modalUrl.innerHTML = `<a href="${img.src}" target="_blank" rel="noopener noreferrer">${img.src}</a>`;
 
-      // 异步获取图片大小
+      modal.classList.remove("hidden");
+
+      const modalLeft = modal.querySelector(".modal-left");
+      if (modalLeft) modalLeft.classList.add("is-loading");
+      modalImg.style.opacity = "0";
+      modalImg.src = img.src;
+
       try {
         const res = await fetch(img.src);
         const blob = await res.blob();
         modalSize.textContent = `${(blob.size / 1024).toFixed(1)} KB`;
-        
-        // 获取图片尺寸
-        const tempImg = new Image();
-        tempImg.onload = () => {
-          if (modalDimensions) {
-            modalDimensions.textContent = `${tempImg.naturalWidth} x ${tempImg.naturalHeight} px`;
-          }
-        };
-        tempImg.src = img.src;
-        
       } catch (e) {
         modalSize.textContent = "Unknown";
-        if (modalDimensions) modalDimensions.textContent = "Unknown";
       }
 
-      modal.classList.remove("hidden");
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        if (modalDimensions) {
+          modalDimensions.textContent = `${tempImg.naturalWidth} x ${tempImg.naturalHeight} px`;
+        }
+        if (modalLeft) modalLeft.classList.remove("is-loading");
+        modalImg.style.opacity = "1";
+      };
+      tempImg.onerror = () => {
+        if (modalLeft) modalLeft.classList.remove("is-loading");
+        modalImg.style.opacity = "1";
+      };
+      tempImg.src = img.src;
+
     };
   });
 
@@ -117,6 +124,9 @@ function setupImageModal() {
     modalClose.onclick = () => {
       modal.classList.add("hidden");
       modalImg.src = "";
+      modalImg.style.opacity = "0";
+      const modalLeft = modal.querySelector(".modal-left");
+      if (modalLeft) modalLeft.classList.remove("is-loading");
     };
   }
 
@@ -124,6 +134,9 @@ function setupImageModal() {
     if (e.target === modal) {
       modal.classList.add("hidden");
       modalImg.src = "";
+      modalImg.style.opacity = "0";
+      const modalLeft = modal.querySelector(".modal-left");
+      if (modalLeft) modalLeft.classList.remove("is-loading");
     }
   };
 }
