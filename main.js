@@ -9,8 +9,7 @@ import { renderSections } from "./ui/renderSections.js";
 import { renderStats } from "./ui/renderStats.js";
 import { renderStructure } from "./ui/renderStructure.js";
 import { initJsonBubble } from "./ui/jsonBubble.js";
-
-import { initModal } from './utils/showModal.js';
+import { initModal, showModal } from "./utils/showModal.js";
 
 /* ================= Init ================= */
 initModal();
@@ -26,6 +25,7 @@ const cdnInput = document.getElementById("cdn");
 const jsonPaste = document.getElementById("jsonPaste"); // Fixed missing reference
 const imagesEl = document.getElementById("images");
 const sectionsEl = document.getElementById("sections");
+const initialStateEl = document.getElementById("initialState");
 
 /* ================= State ================= */
 let lastStats = null;
@@ -65,7 +65,7 @@ function loadTemplateJson(raw, sourceLabel = "") {
     json = JSON.parse(cleanJson(raw));
   } catch (e) {
     console.error(e);
-    alert("JSON parse failed");
+    showModal("JSON parse failed: " + e.message);
     return;
   }
 
@@ -73,6 +73,9 @@ function loadTemplateJson(raw, sourceLabel = "") {
   lastImages = parseImages(json);
   lastSections = parseSections(json);
   templateTree = parseTemplateTree(json, sourceLabel);
+
+  // Hide initial empty state
+  if (initialStateEl) initialStateEl.classList.add("hidden");
 
   renderStats(lastStats);
   renderImages(lastImages, normalizeCdn(cdnInput.value));
@@ -97,6 +100,7 @@ function clearAll() {
   // UI
   imagesEl.classList.add("hidden");
   sectionsEl.classList.add("hidden");
+  if (initialStateEl) initialStateEl.classList.remove("hidden");
   imagesEl.innerHTML = "";
   sectionsEl.innerHTML = "";
   
@@ -161,3 +165,48 @@ cdnInput.addEventListener("input", () => {
     renderImages(lastImages, normalizeCdn(cdnInput.value));
   }, 300);
 });
+
+/* ================= Drag & Drop ================= */
+const dropZone = document.getElementById("dropZone");
+
+if (dropZone) {
+  let dragCounter = 0;
+
+  document.addEventListener("dragenter", (e) => {
+    e.preventDefault();
+    dragCounter++;
+    dropZone.classList.remove("hidden");
+  });
+
+  document.addEventListener("dragleave", (e) => {
+    e.preventDefault();
+    dragCounter--;
+    if (dragCounter <= 0) {
+      dragCounter = 0;
+      dropZone.classList.add("hidden");
+    }
+  });
+
+  document.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  document.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    dragCounter = 0;
+    dropZone.classList.add("hidden");
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    if (file.type === "application/json" || file.name.endsWith(".json")) {
+      fileMeta.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+      if (jsonPaste) jsonPaste.value = "";
+      
+      const raw = await file.text();
+      loadTemplateJson(raw, file.name);
+    } else {
+      showModal("Please drop a valid JSON file (.json)");
+    }
+  });
+}

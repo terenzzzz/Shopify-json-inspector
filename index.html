@@ -50,6 +50,11 @@
 
       <!-- RIGHT -->
       <section class="panel result">
+        <div id="initialState" class="empty-state">
+          <div class="empty-icon">📂</div>
+          <div class="empty-text">No Template Loaded</div>
+          <div class="empty-subtext">Select a JSON file or paste content to inspect.</div>
+        </div>
         <div id="stats" class="card hidden"></div>
         <div id="images" class="card hidden"></div>
         <div id="sections" class="hidden"></div>
@@ -100,6 +105,23 @@
     <!-- JSON Bubble -->
     <div id="jsonBubble" class="json-bubble hidden">
       <pre></pre>
+    </div>
+
+    <!-- Generic Error Modal -->
+    <div id="modal-mask" class="modal-mask hidden">
+      <div class="modal">
+        <h3>Notice</h3>
+        <p id="modal-message"></p>
+        <button id="modal-confirm">OK</button>
+      </div>
+    </div>
+
+    <!-- Drop Zone -->
+    <div id="dropZone" class="drop-zone hidden">
+      <div class="drop-content">
+        <div class="drop-icon">📂</div>
+        <div class="drop-text">Drop JSON file here</div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>

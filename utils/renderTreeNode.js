@@ -1,9 +1,12 @@
-export function renderTreeNode(node, prefix = "", isLast = true) {
-  const lines = [];
-
-  const connector = prefix ? (isLast ? "└─ " : "├─ ") : "";
-
-  const className = ["tree-node", node.disabled ? "is-disabled" : ""]
+export function renderTreeNode(node) {
+  const hasChildren = node.children && node.children.length > 0;
+  
+  const className = [
+    "tree-node",
+    "tree-content",
+    node.disabled ? "is-disabled" : "",
+    node.nodeType ? `is-${node.nodeType}` : ""
+  ]
     .filter(Boolean)
     .join(" ");
 
@@ -11,28 +14,32 @@ export function renderTreeNode(node, prefix = "", isLast = true) {
     ? ` data-json="${escapeHtml(JSON.stringify(node.data))}"`
     : "";
 
+  const toggleHtml = hasChildren
+    ? `<span class="tree-toggle">▶</span>`
+    : `<span class="tree-toggle placeholder"></span>`;
+
   const labelHtml = `<span class="tree-label">${node.label}</span>`;
   const metaHtml = node.meta
     ? `<span class="tree-meta"> (${node.meta})</span>`
     : "";
 
-  lines.push(
-    `<div class="${className}"${dataAttr}>` +
-      `<span class="tree-prefix">${prefix}${connector}</span>` +
-      `${labelHtml}${metaHtml}` +
-      `</div>`,
-  );
-
-  if (node.children && node.children.length) {
-    const nextPrefix = prefix + '   ';
-
-    node.children.forEach((child, index) => {
-      const last = index === node.children.length - 1;
-      lines.push(renderTreeNode(child, nextPrefix, last));
-    });
+  let childrenHtml = "";
+  if (hasChildren) {
+    const childrenItems = node.children
+      .map((child) => renderTreeNode(child))
+      .join("");
+    childrenHtml = `<ul class="tree-children hidden">${childrenItems}</ul>`;
   }
 
-  return lines.join("");
+  return `
+    <li class="tree-item">
+      <div class="${className}"${dataAttr}>
+        ${toggleHtml}
+        ${labelHtml}${metaHtml}
+      </div>
+      ${childrenHtml}
+    </li>
+  `;
 }
 
 function escapeHtml(str) {

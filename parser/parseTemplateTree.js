@@ -17,6 +17,7 @@ export function parseTemplateTree(templateJson, filename = "template.json") {
 
         return {
           label: sectionId,
+          nodeType: "section",
           disabled: section.disabled === true,
           meta: [section.type]
             .filter(Boolean)
@@ -24,6 +25,7 @@ export function parseTemplateTree(templateJson, filename = "template.json") {
           data: section,
           children: Object.values(blocks).map((block) => ({
             label: block.type || "unknown",
+            nodeType: "block",
             disabled: block.disabled === true,
             data: block,
           })),

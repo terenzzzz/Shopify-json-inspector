@@ -2,9 +2,24 @@ import { downloadImages } from "../utils/downloadImages.js";
 
 export function renderImages(images, cdnPrefix) {
   const imagesEl = document.getElementById("images");
-  if (!images || !images.length || !imagesEl) return;
+  if (!images || !imagesEl) return;
 
   imagesEl.classList.remove("hidden");
+
+  if (images.length === 0) {
+    imagesEl.innerHTML = `
+      <h3>
+        <span>🖼 Images</span>
+        <span>0</span>
+      </h3>
+      <div class="empty-state">
+        <div class="empty-icon">🖼️</div>
+        <div class="empty-text">No Images Found</div>
+        <div class="empty-subtext">This template does not appear to contain any image references.</div>
+      </div>
+    `;
+    return;
+  }
 
   imagesEl.innerHTML = `
     <h3>
