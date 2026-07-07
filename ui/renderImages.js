@@ -98,7 +98,9 @@ function syncSelectionState() {
     const name = item.dataset.name;
     const selected = selectedImageNames.has(name);
     item.classList.toggle("is-selected", selected);
-    item.querySelector(".image-select-check")?.classList.toggle("is-checked", selected);
+    const checkBtn = item.querySelector(".image-select-check");
+    checkBtn?.classList.toggle("is-checked", selected);
+    checkBtn?.setAttribute("aria-pressed", String(selected));
   });
   updateSelectionUI();
 }
@@ -127,9 +129,9 @@ function toggleImageSelection(name, item) {
   }
 
   item.classList.toggle("is-selected", selectedImageNames.has(name));
-  item
-    .querySelector(".image-select-check")
-    ?.classList.toggle("is-checked", selectedImageNames.has(name));
+  const checkBtn = item.querySelector(".image-select-check");
+  checkBtn?.classList.toggle("is-checked", selectedImageNames.has(name));
+  checkBtn?.setAttribute("aria-pressed", String(selectedImageNames.has(name)));
   updateSelectionUI();
 }
 
@@ -138,8 +140,13 @@ function setupImageSelection(images) {
     const name = item.dataset.name;
     if (!name) return;
 
-    item.addEventListener("click", (e) => {
-      if (e.target.closest(".preview-img")) return;
+    item.querySelector(".image-select-check")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleImageSelection(name, item);
+    });
+
+    item.querySelector(".name")?.addEventListener("click", (e) => {
+      e.stopPropagation();
       toggleImageSelection(name, item);
     });
   });
@@ -308,7 +315,7 @@ export function renderImages(images, cdnPrefix) {
       <div class="image-toolbar-left">
         <button type="button" id="select-all-images" class="btn-secondary">全选</button>
         <button type="button" id="clear-selection" class="btn-secondary">取消选择</button>
-        <span class="image-select-hint">点击卡片选中，点击图片预览</span>
+        <span class="image-select-hint">点击勾选框或文件名选中，点击图片预览</span>
       </div>
       <span id="image-selected-count" class="image-selected-count">未选择</span>
     </div>
@@ -320,8 +327,13 @@ export function renderImages(images, cdnPrefix) {
           const isWebp = isWebpImage(name);
           const isSelected = selectedImageNames.has(name);
           return `
-            <div class="image-item${isWebp ? "" : " image-item--non-webp"}${isSelected ? " is-selected" : ""}" data-name="${name}" title="${isWebp ? "点击选中" : "非 WebP 格式，建议转换"}">
-              <span class="image-select-check${isSelected ? " is-checked" : ""}" aria-hidden="true"></span>
+            <div class="image-item${isWebp ? "" : " image-item--non-webp"}${isSelected ? " is-selected" : ""}" data-name="${name}" title="${isWebp ? "" : "非 WebP 格式，建议转换"}">
+              <button
+                type="button"
+                class="image-select-check${isSelected ? " is-checked" : ""}"
+                aria-label="选择图片 ${name}"
+                aria-pressed="${isSelected}"
+              ></button>
               <div class="thumb">
                 ${
                   src
@@ -399,7 +411,8 @@ function setupImageModal(cdnPrefix) {
   if (!modal || !modalImg) return;
 
   document.querySelectorAll(".preview-img").forEach(img => {
-    img.onclick = async () => {
+    img.onclick = async (e) => {
+      e.stopPropagation();
       const name = img.dataset.name || "";
       const downloadUrl = cdnPrefix && name ? buildDownloadUrl(cdnPrefix, name) : img.src;
 
