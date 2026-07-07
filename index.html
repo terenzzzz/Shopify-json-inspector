@@ -46,11 +46,15 @@
 
         <label class="field">
           <span>CDN 前缀</span>
-          <input
-            type="text"
-            id="cdn"
-            placeholder="https://uk.shokz.com/cdn/shop/files/"
-          />
+          <div class="cdn-input-wrap">
+            <input
+              type="text"
+              id="cdn"
+              autocomplete="off"
+              placeholder="https://uk.shokz.com/cdn/shop/files/"
+            />
+            <div id="cdnHistoryMenu" class="cdn-history-menu hidden"></div>
+          </div>
           <small>用于预览与 CDN 模式下载（非原图）</small>
         </label>
 

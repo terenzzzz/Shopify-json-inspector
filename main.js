@@ -24,6 +24,7 @@ const fileBtn = document.getElementById("fileBtn");
 const clearBtn = document.getElementById("clearBtn");
 const fileMeta = document.getElementById("fileMeta");
 const cdnInput = document.getElementById("cdn");
+const cdnHistoryMenuEl = document.getElementById("cdnHistoryMenu");
 const zipNameInput = document.getElementById("zipName");
 const jsonPaste = document.getElementById("jsonPaste"); // Fixed missing reference
 const imagesEl = document.getElementById("images");
@@ -38,6 +39,160 @@ let lastVideos = [];
 let lastSections = null;
 let templateTree = null;
 let lastTemplateName = "template.json";
+
+const CDN_DB_NAME = "shopify-json-inspector-db";
+const CDN_DB_VERSION = 1;
+const CDN_STORE_NAME = "kv";
+const CDN_HISTORY_KEY = "cdn_history";
+const CDN_HISTORY_LIMIT = 20;
+let cdnHistory = [];
+
+function openAppDb() {
+  return new Promise((resolve, reject) => {
+    if (!window.indexedDB) {
+      reject(new Error("IndexedDB not supported"));
+      return;
+    }
+    const req = indexedDB.open(CDN_DB_NAME, CDN_DB_VERSION);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains(CDN_STORE_NAME)) {
+        db.createObjectStore(CDN_STORE_NAME);
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error || new Error("open indexedDB failed"));
+  });
+}
+
+async function dbGet(key) {
+  const db = await openAppDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(CDN_STORE_NAME, "readonly");
+    const store = tx.objectStore(CDN_STORE_NAME);
+    const req = store.get(key);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error || new Error("indexedDB read failed"));
+    tx.oncomplete = () => db.close();
+    tx.onabort = () => db.close();
+    tx.onerror = () => db.close();
+  });
+}
+
+async function dbSet(key, value) {
+  const db = await openAppDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(CDN_STORE_NAME, "readwrite");
+    const store = tx.objectStore(CDN_STORE_NAME);
+    const req = store.put(value, key);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error || new Error("indexedDB write failed"));
+    tx.oncomplete = () => db.close();
+    tx.onabort = () => db.close();
+    tx.onerror = () => db.close();
+  });
+}
+
+function renderCdnHistoryOptions() {
+  if (!cdnHistoryMenuEl) return;
+  cdnHistoryMenuEl.innerHTML = "";
+  for (const item of cdnHistory) {
+    const row = document.createElement("div");
+    row.className = "cdn-history-item";
+    const text = document.createElement("span");
+    text.className = "cdn-history-text";
+    text.textContent = item;
+    const delBtn = document.createElement("button");
+    delBtn.type = "button";
+    delBtn.className = "cdn-history-delete";
+    delBtn.setAttribute("aria-label", "删除该条历史");
+    delBtn.textContent = "删除";
+    row.appendChild(text);
+    row.appendChild(delBtn);
+
+    delBtn.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    delBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      deleteCdnHistoryItem(item);
+    });
+
+    row.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      cdnInput.value = item;
+      hideCdnHistoryMenu();
+      saveCdnToHistory(item);
+      if (lastImages.length || lastVideos.length) {
+        const cdn = normalizeCdn(cdnInput.value);
+        renderImages(lastImages, cdn);
+        renderVideos(lastVideos, cdn);
+      }
+    });
+    cdnHistoryMenuEl.appendChild(row);
+  }
+}
+
+function showCdnHistoryMenu() {
+  if (!cdnHistoryMenuEl) return;
+  if (!cdnHistory.length) {
+    hideCdnHistoryMenu();
+    return;
+  }
+  renderCdnHistoryOptions();
+  cdnHistoryMenuEl.classList.remove("hidden");
+}
+
+function hideCdnHistoryMenu() {
+  if (!cdnHistoryMenuEl) return;
+  cdnHistoryMenuEl.classList.add("hidden");
+}
+
+async function loadCdnHistory() {
+  try {
+    const stored = await dbGet(CDN_HISTORY_KEY);
+    if (Array.isArray(stored)) {
+      cdnHistory = stored.filter((v) => typeof v === "string" && v.trim());
+    } else {
+      cdnHistory = [];
+    }
+    renderCdnHistoryOptions();
+  } catch (err) {
+    console.warn("读取 CDN 历史失败：", err);
+    cdnHistory = [];
+  }
+}
+
+async function saveCdnToHistory(rawInput) {
+  const normalized = normalizeCdn(rawInput);
+  if (!normalized) return;
+  const next = [normalized, ...cdnHistory.filter((item) => item !== normalized)].slice(
+    0,
+    CDN_HISTORY_LIMIT
+  );
+  cdnHistory = next;
+  renderCdnHistoryOptions();
+  try {
+    await dbSet(CDN_HISTORY_KEY, cdnHistory);
+  } catch (err) {
+    console.warn("保存 CDN 历史失败：", err);
+  }
+}
+
+async function deleteCdnHistoryItem(value) {
+  cdnHistory = cdnHistory.filter((item) => item !== value);
+  renderCdnHistoryOptions();
+  if (!cdnHistory.length) {
+    hideCdnHistoryMenu();
+  }
+  try {
+    await dbSet(CDN_HISTORY_KEY, cdnHistory);
+  } catch (err) {
+    console.warn("删除 CDN 历史失败：", err);
+  }
+}
 
 /* ================= Utils ================= */
 
@@ -193,6 +348,32 @@ cdnInput.addEventListener("input", () => {
   }, 300);
 });
 
+cdnInput.addEventListener("change", () => {
+  saveCdnToHistory(cdnInput.value);
+});
+
+cdnInput.addEventListener("blur", () => {
+  saveCdnToHistory(cdnInput.value);
+  setTimeout(() => {
+    hideCdnHistoryMenu();
+  }, 120);
+});
+
+cdnInput.addEventListener("focus", () => {
+  showCdnHistoryMenu();
+});
+
+cdnInput.addEventListener("click", () => {
+  showCdnHistoryMenu();
+});
+
+document.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof Node)) return;
+  if (target === cdnInput || (cdnHistoryMenuEl && cdnHistoryMenuEl.contains(target))) return;
+  hideCdnHistoryMenu();
+});
+
 /* ================= Drag & Drop ================= */
 const dropZone = document.getElementById("dropZone");
 
@@ -244,3 +425,5 @@ function stripExt(name) {
   const i = name.lastIndexOf(".");
   return i > 0 ? name.slice(0, i) : name;
 }
+
+loadCdnHistory();
