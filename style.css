@@ -112,7 +112,7 @@ header a:hover {
   color: var(--text-main);
 }
 
-textarea, input[type="text"] {
+textarea, input[type="text"], input[type="password"] {
   width: 100%;
   padding: 10px 12px;
   font-family: var(--font-mono);
@@ -125,7 +125,7 @@ textarea, input[type="text"] {
   color: var(--text-main);
 }
 
-textarea:focus, input[type="text"]:focus {
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -168,6 +168,25 @@ button:active {
   transform: translateY(0);
 }
 
+/* Secondary Button */
+.btn-secondary {
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--text-muted);
+  background: #f8fafc;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Secondary / File Button */
 .file-btn {
   background: #fff;
@@ -205,6 +224,9 @@ button:active {
 }
 
 .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin-top: 20px;
 }
 
@@ -216,10 +238,48 @@ button:active {
 
 .field small {
   display: block;
-  margin-top: 6px;
+  margin: 0;
   font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 24px;
+}
+
+.field + .field-group {
+  margin-top: 8px;
+}
+
+.field-group + .field {
+  margin-top: 20px;
+}
+
+.field-group {
+  margin-bottom: 0;
+  padding: 14px 14px 16px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+}
+
+.field-group .field {
+  margin-top: 14px;
+}
+
+.field-group .field:first-child {
+  margin-top: 0;
+}
+
+.checkbox-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.checkbox-field input {
+  margin-top: 2px;
 }
 
 /* Cards */
@@ -272,6 +332,7 @@ button:active {
 }
 
 .image-item {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px;
@@ -287,7 +348,78 @@ button:active {
   transform: translateY(-2px);
 }
 
+.image-item.is-selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.18);
+}
+
+.image-select-check {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 0.95);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  pointer-events: none;
+}
+
+.image-select-check.is-checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.image-select-check.is-checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.image-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.image-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.image-select-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.image-selected-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.image-download-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .thumb {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   background: #f1f5f9;
@@ -310,6 +442,136 @@ button:active {
   text-align: center;
   color: var(--text-main);
   font-weight: 500;
+}
+
+.image-size {
+  margin-top: 4px;
+  font-size: 11px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.image-size--muted {
+  color: var(--text-light);
+}
+
+.image-size--error {
+  color: var(--danger);
+}
+
+.image-size--large {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.image-item--large {
+  border-color: #f87171;
+  background: #fef2f2;
+  box-shadow: 0 0 0 1px rgb(248 113 113 / 0.35);
+}
+
+.image-item--large.is-selected {
+  border-color: var(--primary);
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.18);
+}
+
+.image-item--large:hover {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgb(239 68 68 / 0.2), var(--shadow-md);
+}
+
+.image-item--large .thumb {
+  background: #fee2e2;
+}
+
+.image-item--non-webp.image-item--large {
+  border-color: #f87171;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef2f2 100%);
+  box-shadow: 0 0 0 1px rgb(248 113 113 / 0.35);
+}
+
+.image-item--non-webp.image-item--large .thumb {
+  background: linear-gradient(135deg, #fef3c7 0%, #fee2e2 100%);
+}
+
+.image-item--non-webp {
+  border-color: #fbbf24;
+  background: #fffbeb;
+  box-shadow: 0 0 0 1px rgb(251 191 36 / 0.35);
+}
+
+.image-item--non-webp.is-selected {
+  border-color: var(--primary);
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.18);
+}
+
+.image-item--non-webp:hover {
+  border-color: var(--warning);
+  box-shadow: 0 0 0 2px rgb(245 158 11 / 0.25), var(--shadow-md);
+}
+
+.image-item--non-webp .thumb {
+  background: #fef3c7;
+}
+
+.image-format-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--warning);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.image-format-hint {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.image-format-hint strong {
+  color: #78350f;
+}
+
+.image-format-hint p {
+  margin: 6px 0 0;
+}
+
+.image-format-hint code {
+  font-size: 12px;
+  background: rgb(255 255 255 / 0.7);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.image-size-hint {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #991b1b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.image-size-hint strong {
+  color: #7f1d1d;
+}
+
+.image-size-hint p {
+  margin: 6px 0 0;
 }
 
 .section-row {

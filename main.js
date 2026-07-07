@@ -103,6 +103,12 @@ function clearAll() {
   if (jsonPaste) jsonPaste.value = "";
   fileMeta.textContent = "未选择文件";
   cdnInput.value = "";
+  const shopDomainInput = document.getElementById("shopDomain");
+  const adminTokenInput = document.getElementById("adminToken");
+  const downloadOriginalInput = document.getElementById("downloadOriginal");
+  if (shopDomainInput) shopDomainInput.value = "";
+  if (adminTokenInput) adminTokenInput.value = "";
+  if (downloadOriginalInput) downloadOriginalInput.checked = false;
   if (zipNameInput) {
     zipNameInput.value = "";
     zipNameInput.placeholder = "";

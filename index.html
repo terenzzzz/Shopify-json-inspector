@@ -40,10 +40,43 @@
           <input
             type="text"
             id="cdn"
-            placeholder="https://uk.shokz.com/cdn/shop/files/..."
+            placeholder="https://uk.shokz.com/cdn/shop/files/"
           />
-          <small>用于图片下载时拼接地址</small>
+          <small>用于预览与 CDN 模式下载（非原图）</small>
         </label>
+
+        <label class="field">
+          <span>原图下载 (暂未支持)</span>
+        </label>
+
+        <div class="field-group">
+          <label class="field">
+            <span>店铺域名</span>
+            <input
+              type="text"
+              id="shopDomain"
+              placeholder="your-store.myshopify.com"
+              autocomplete="off"
+            />
+            <small>Admin API 需使用 .myshopify.com 域名</small>
+          </label>
+
+          <label class="field">
+            <span>Admin Token</span>
+            <input
+              type="password"
+              id="adminToken"
+              placeholder="shpat_..."
+              autocomplete="off"
+            />
+            <small>需 read_files 权限；仅经本地代理转发，不会上传</small>
+          </label>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="downloadOriginal" />
+            <span>下载原图（需先运行 node server/admin-proxy.mjs）</span>
+          </label>
+        </div>
         
         <label class="field">
           <span>导出 ZIP 名称</span>
